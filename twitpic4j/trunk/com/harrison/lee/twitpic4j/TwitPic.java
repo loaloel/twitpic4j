@@ -88,16 +88,19 @@ public class TwitPic {
 	 */
 	public TwitPicResponse upload(File picture) throws IOException, TwitPicException {
 		
-		// Create new HTTP client with 'upload' URL set userame and password for POST request
-		// Also, set file parameter
+		// Create new HTTP client with 'upload' URL
 		mRequest = new ClientHttpRequest(new URL(UPLOAD_URL));
+		
+		// Set userame and password for POST request
 		setUserParameters();
+		
+		// Set file parameter
 		mRequest.setParameter(PARAM_MEDIA, picture);
 		
-		// Get response
+		// Get response XML
 		mResponse = new ResponseXMLParser(mRequest.post()).parseResponse();
 		
-		// Handle response XML
+		// Handle possible errors returned by TwitPic
 		if(mResponse.getErrorCode() != null)
 			handleErrorMessage(Integer.parseInt(mResponse.getErrorCode()));
 		
@@ -125,14 +128,14 @@ public class TwitPic {
 		// Set file parameter
 		mRequest.setParameter(PARAM_MEDIA, picture);
 		
-		// Get response
+		// Get response XML
 		mResponse = new ResponseXMLParser(mRequest.post()).parseResponse();
 		
-		// Handle
+		// Handle possible errors returned by TwitPic
 		if(mResponse.getErrorCode() != null)
 			handleErrorMessage(Integer.parseInt(mResponse.getErrorCode()));
 		
-		// Make post request
+		// Make post request and return response
 		return mResponse;
 	}
 	
@@ -156,21 +159,21 @@ public class TwitPic {
 		// Set userame and password for POST request
 		setUserParameters();
 		
-		// Set meassage parameter
+		// Set message parameter
 		if(message != null)
 			mRequest.setParameter(PARAM_MESSAGE, message);
 		
 		// Set file parameter
 		mRequest.setParameter(PARAM_MEDIA, picture);
 		
-		// Get response
+		// Get response XML
 		mResponse = new ResponseXMLParser(mRequest.post()).parseResponse();
 		
-		// Handle
+		// Handle possible errors returned by TwitPic
 		if(mResponse.getErrorCode() != null)
 			handleErrorMessage(Integer.parseInt(mResponse.getErrorCode()));
 		
-		// Make post request
+		// Make post request and return response
 		return mResponse;
 	}
 	
@@ -196,21 +199,21 @@ public class TwitPic {
 		// Set userame and password for POST request
 		setUserParameters();
 		
-		// Set meassage parameter
+		// Set message parameter
 		if(message != null)
 			mRequest.setParameter(PARAM_MESSAGE, message);
 		
 		// Set file parameter
 		mRequest.setParameter(PARAM_MEDIA, picture);
 		
-		// Get response
+		// Get response XML
 		mResponse = new ResponseXMLParser(mRequest.post()).parseResponse();
 		
-		// Handle
+		// Handle possible errors returned by TwitPic
 		if(mResponse.getErrorCode() != null)
 			handleErrorMessage(Integer.parseInt(mResponse.getErrorCode()));
 		
-		// Make post request
+		// Make post request and return response
 		return mResponse;
 		
 	}
