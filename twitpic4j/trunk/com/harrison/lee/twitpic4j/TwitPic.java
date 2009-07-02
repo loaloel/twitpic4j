@@ -88,23 +88,20 @@ public class TwitPic {
 	 */
 	public TwitPicResponse upload(File picture) throws IOException, TwitPicException {
 		
-		// Create new HTTP client with 'upload' URL
+		// Create new HTTP client with 'upload' URL set userame and password for POST request
+		// Also, set file parameter
 		mRequest = new ClientHttpRequest(new URL(UPLOAD_URL));
-		
-		// Set userame and password for POST request
 		setUserParameters();
-		
-		// Set file parameter
 		mRequest.setParameter(PARAM_MEDIA, picture);
 		
 		// Get response
 		mResponse = new ResponseXMLParser(mRequest.post()).parseResponse();
 		
-		// Handle
+		// Handle response XML
 		if(mResponse.getErrorCode() != null)
 			handleErrorMessage(Integer.parseInt(mResponse.getErrorCode()));
 		
-		// Make post request
+		// Make post request and return response
 		return mResponse;
 	}
 	
