@@ -97,18 +97,21 @@ public class ResponseXMLParser extends DefaultHandler{
 	public void startElement(String uri, String localName, String name, Attributes attributes) throws SAXException {
 		
 		name = name.trim().toLowerCase();	// Format tag name
+		localName = localName.trim().toLowerCase();
+		
+		String tagName = (name == null) ? localName : name;
 		
 		mIsStartElem = true;	// Let interested parties know current element is a start tag
     	mLevel++;				// Increase the mLevel of the tree
-        mTags.add(name);		// Add tag to tree
+        mTags.add(tagName);		// Add tag to tree
 		
         // Store status and error info (if error occurred)
         String status;
-        if(name.equals("rsp")) {
+        if(tagName.equals("rsp")) {
         	status = attributes.getValue("status");
         	status = status == null ? attributes.getValue("stat") : status;
         	mResponse.setStatus(status);
-        } else if(name.equals("err")){
+        } else if(tagName.equals("err")){
         	mResponse.setErrorCode(attributes.getValue("code"));
         	mResponse.setErrorMessage(attributes.getValue("msg"));
         }
